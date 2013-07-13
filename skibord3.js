@@ -1,21 +1,15 @@
 enchant();
 
 var IMG = ['images/ski/005.png','images/ski/000.png','images/ski/004.png','images/ski/snowMan.png','images/ski/tree.png'];
-window.onload = function(){
-    var game = new Game(320,320);
-    game.fps = 16;
-    game.preload(IMG);
-    game.tick = 0;
 
-
-    var player = enchant.Class.create(enchant.Sprite,{
+var player = enchant.Class.create(enchant.Sprite,{
         initialize: function(){
             enchant.Sprite.call(this,50,53);
             this.x = Math.random()*270;
             this.y = 0;
             this.frame = 5;
         }
-    });
+});
     //クラスを継承
     var Human = enchant.Class.create(player,{
         initialize: function(){
@@ -49,20 +43,35 @@ window.onload = function(){
     var Tree = enchant.Class.create(barrier,{
         initialize: function(){
             barrier.call(this);
-            for(var i = 0; i < 5; i++){
                 this.x = Math.random()*270;
                 this.y = Math.random()*270;
                 this.image = game.assets[IMG[4]];
-                game.rootScene.addChild(this);
-            }
             game.rootScene.addChild(this);
         }
     });
+
+window.onload = function(){
+    /*var array = new Array(4);
+    for(var i = 0; i < 4; i++){
+        this.x = (Math.random()*5)*5;
+        this.y = (Math.random()*3)*3;
+        array[i] = ('this.x','this.y');
+    }*/
+    game = new Game(320,320);
+    game.fps = 16;
+    game.preload(IMG);
+    game.tick = 0;
+
+
+    
     
 
     game.onload = function(){
-        Human();
-        Tree();
+        new Human();
+        new Tree();
+        new Tree();
+        new Tree();
+        new Tree();
     };
 
     game.start();
