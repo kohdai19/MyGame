@@ -103,7 +103,6 @@ window.onload = function(){
         });
         game.rootScene.addChild(select0);
         game.rootScene.addChild(select1);
-        return scene;
     };
     
     //シーン1の生成
@@ -133,12 +132,18 @@ window.onload = function(){
         var bg = new Sprite(320, 320);
         bg.image = game.assets[IMG[8]];
         game.rootScene.addChild(bg);
-        new Human();
+        var skier = new Human();
+        
         new Tree();
         new Tree();
         new Tree();
         new Tree();
-        new backBG();
+        this.addEventListener(Event.ENTER_FRAME,function(){
+            if(skier.y > 200){
+                game.replaceScene(game.makeScene3());
+     //           human.y = 0;
+            };
+        });
     };
     
     //シーン2の生成
@@ -159,6 +164,22 @@ window.onload = function(){
         scene.addChild(select0);
         return scene;
     };
+    
+    //シーン3の生成
+    game.makeScene3 = function() {
+        var scene = new Scene();
+        var bg = new Sprite(320, 320);
+        bg.image = game.assets[IMG[8]];
+        game.rootScene.addChild(bg);
+        new Human();
+        new Tree();
+        new Tree();
+        new Tree();
+        new Tree();
+        /*if(human.y < 200){
+            game.pushScene(game.makeScene4());
+        };*/
+    }
 
     game.start();
 };
