@@ -1,6 +1,6 @@
 enchant();
 
-var IMG = ['images/ski/005.png','images/ski/000.png','images/ski/004.png','images/ski/snowMan.png','images/ski/tree.png'];
+var IMG = ['images/ski/005.png','images/ski/000.png','images/ski/004.png','images/ski/snowMan.png','images/ski/tree.png','images/ski/stageClearCopy.jpg'];
 
 var player = enchant.Class.create(enchant.Sprite,{
         initialize: function(){
@@ -32,6 +32,19 @@ var player = enchant.Class.create(enchant.Sprite,{
         }
     });
     
+var backBG = enchant.Class.create(enchant.Sprite,{
+        initialize: function(){
+            enchant.Sprite.call(this,320,320);
+            this.frame = 5;
+            this.addEventListener(Event.ENTER_FRAME,function(){
+                if(Human.y){
+                    this.image = game.assets[IMG[5]];
+                }
+            });
+            game.rootScene.addChild(this);
+        }
+});
+
     var barrier = enchant.Class.create(enchant.Sprite,{
         initialize: function(){
             enchant.Sprite.call(this,65,114);
@@ -62,16 +75,14 @@ window.onload = function(){
     game.preload(IMG);
     game.tick = 0;
 
-
     
-    
-
     game.onload = function(){
         new Human();
         new Tree();
         new Tree();
         new Tree();
         new Tree();
+        new backBG();
     };
 
     game.start();
